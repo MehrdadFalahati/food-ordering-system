@@ -1,6 +1,8 @@
 package com.food.ordering.system.order.service.domain;
 
+import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.order.service.domain.entity.Order;
+import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import com.food.ordering.system.order.service.domain.entity.Product;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
 import com.food.ordering.system.order.service.domain.event.OrderCanceledEvent;
@@ -12,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class OrderDomainServiceImpl implements OrderDomainService {
@@ -61,12 +64,22 @@ public class OrderDomainServiceImpl implements OrderDomainService {
     }
 
     private void setOrderProductInformation(Order order, Restaurant restaurant) {
-        order.getItems()
-                .forEach(orderItem -> restaurant.getProducts().forEach(rp -> {
+        /*restaurant.getProducts().forEach(rp -> {
                     Product currentProduct = orderItem.getProduct();
                     if (currentProduct.equals(rp)) {
                         currentProduct.updateWithConfirmedNameAndPrice(rp.getName(), rp.getPrice());
                     }
-                }));
+        })*/
+        order.getItems()
+                .forEach(orderItem -> updateOrderItemProducts(restaurant, orderItem));
+    }
+
+    private void updateOrderItemProducts(Restaurant restaurant, OrderItem orderItem) {
+        var currentProduct = orderItem.getProduct();
+        var restaurantProducts = restaurant.getProducts();
+        if (restaurantProducts.containsKey(currentProduct.getId())) {
+            Product rp = restaurantProducts.get(currentProduct.getId());
+            currentProduct.updateWithConfirmedNameAndPrice(rp.getName(), rp.getPrice());
+        }
     }
 }
