@@ -1,14 +1,13 @@
 package com.food.ordering.system.order.service.domain.entity;
 
 import com.food.ordering.system.domain.entity.AggregateRoot;
-import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.domain.valueobject.RestaurantId;
 
 import java.util.List;
 import java.util.Map;
 
 public class Restaurant extends AggregateRoot<RestaurantId> {
-    private final Map<ProductId, Product> products;
+    private final List<Product> products;
     private boolean active;
 
     private Restaurant(Builder builder) {
@@ -21,7 +20,7 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
         return new Builder();
     }
 
-    public Map<ProductId, Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
@@ -31,7 +30,7 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
 
     public static final class Builder {
         private RestaurantId restaurantId;
-        private Map<ProductId, Product> products;
+        private List<Product> products;
         private boolean active;
 
         private Builder() {
@@ -42,7 +41,7 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
             return this;
         }
 
-        public Builder products(Map<ProductId, Product> val) {
+        public Builder products(List<Product> val) {
             products = val;
             return this;
         }
