@@ -1,0 +1,9 @@
+## up zookeeper
+docker-compose -f common.yml -f zookeeper.yml up
+## down zookeeper
+docker-compose -f common.yml -f zookeeper.yml down
+## up kafka
+docker-compose -f common.yml -f kafka_cluster.yml up
+## down kafka
+docker-compose -f common.yml -f kafka_cluster.yml down
+docker-compose -f common.yml -f init_kafka.yml up
