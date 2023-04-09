@@ -11,8 +11,5 @@
 
     <artifactId>infrastructure</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>kafka/kafka-model</module>
-    </modules>
 
 </project>
