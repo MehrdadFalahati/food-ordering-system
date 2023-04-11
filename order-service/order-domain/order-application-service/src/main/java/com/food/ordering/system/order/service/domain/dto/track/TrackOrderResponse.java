@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class TrackOrderResonse {
+public class TrackOrderResponse {
     @NotNull
     private final UUID orderTrackingId;
     @NotNull

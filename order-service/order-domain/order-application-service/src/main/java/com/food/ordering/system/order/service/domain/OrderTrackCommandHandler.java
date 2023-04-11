@@ -1,7 +1,7 @@
 package com.food.ordering.system.order.service.domain;
 
 import com.food.ordering.system.order.service.domain.dto.track.TrackOrderQuery;
-import com.food.ordering.system.order.service.domain.dto.track.TrackOrderResonse;
+import com.food.ordering.system.order.service.domain.dto.track.TrackOrderResponse;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.exception.OrderNotFoundException;
 import com.food.ordering.system.order.service.domain.mapper.OrderDataMapper;
@@ -23,7 +23,7 @@ public class OrderTrackCommandHandler {
     private final OrderRepository orderRepository;
 
     @Transactional(readOnly = true)
-    public TrackOrderResonse trackOrder(TrackOrderQuery trackOrderQuery) {
+    public TrackOrderResponse trackOrder(TrackOrderQuery trackOrderQuery) {
         Optional<Order> orderResult = orderRepository.findByTrackingId(new TrackingId(trackOrderQuery.getOrderTrackingId()));
         if (orderResult.isEmpty()) {
             log.warn("Could not find order with tracking id: {}", trackOrderQuery.getOrderTrackingId());
