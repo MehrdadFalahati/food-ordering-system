@@ -25,20 +25,12 @@ public class KafkaProducerImpl<K extends Serializable, V extends SpecificRecordB
     @Override
     public void send(String topicName, K key, V message, ListenableFutureCallback<SendResult<K, V>> callback) {
         log.info("Sending message={} to topic={}", message, topicName);
-        kafkaTemplate.send(topicName, key, message)
-                .addCallback(new ListenableFutureCallback<>() {
-                    @Override
-                    public void onFailure(Throwable ex) {
-                        log.error("Error sending message to topic: {}, also message {}", topicName, message, ex);
-                        callback.onFailure(ex);
-                    }
-
-                    @Override
-                    public void onSuccess(SendResult<K, V> result) {
-                        log.info("Message sent to topic: {}, also message {}", topicName, message);
-                        callback.onSuccess(result);
-                    }
-                });
+        try {
+            ListenableFuture<SendResult<K, V>> sendResultListenableFuture = kafkaTemplate.send(topicName, key, message);
+            sendResultListenableFuture.addCallback(callback);
+        } catch (KafkaException e) {
+            log.error("Sending message to kafka has an Error", e);
+        }
     }
 
     @PreDestroy
