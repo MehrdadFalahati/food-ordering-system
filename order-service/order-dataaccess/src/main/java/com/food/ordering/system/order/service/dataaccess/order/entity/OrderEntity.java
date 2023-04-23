@@ -2,7 +2,7 @@ package com.food.ordering.system.order.service.dataaccess.order.entity;
 
 
 import com.food.ordering.system.domain.valueobject.OrderStatus;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
