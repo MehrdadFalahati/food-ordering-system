@@ -12,6 +12,8 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import static com.food.ordering.system.domain.DomainConstants.UTC;
+
 public class Payment extends AggregateRoot<PaymentId> {
 
     private final OrderId orderId;
@@ -23,7 +25,7 @@ public class Payment extends AggregateRoot<PaymentId> {
 
     public void initializePayment() {
         setId(new PaymentId(UUID.randomUUID()));
-        createAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        createAt = ZonedDateTime.now(ZoneId.of(UTC));
     }
 
     public void validatePayment(List<String> failureMessages) {

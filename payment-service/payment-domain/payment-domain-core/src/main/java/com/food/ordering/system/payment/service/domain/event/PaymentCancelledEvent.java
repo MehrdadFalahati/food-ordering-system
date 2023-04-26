@@ -3,10 +3,11 @@ package com.food.ordering.system.payment.service.domain.event;
 import com.food.ordering.system.payment.service.domain.entity.Payment;
 
 import java.time.ZonedDateTime;
+import java.util.Collections;
 import java.util.List;
 
 public class PaymentCancelledEvent extends PaymentEvent {
-    public PaymentCancelledEvent(Payment payment, ZonedDateTime createAt, List<String> failureMessages) {
-        super(payment, createAt, failureMessages);
+    public PaymentCancelledEvent(Payment payment, ZonedDateTime createAt) {
+        super(payment, createAt, Collections.emptyList());
     }
 }
