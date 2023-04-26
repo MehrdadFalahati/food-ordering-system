@@ -1,4 +1,4 @@
-package com.food.ordering.system.payment.service.domain.event;
+package com.food.ordering.system.payment.service.domain.entity;
 
 import com.food.ordering.system.domain.entity.AggregateRoot;
 import com.food.ordering.system.domain.valueobject.CustomerId;
@@ -7,7 +7,10 @@ import com.food.ordering.system.domain.valueobject.OrderId;
 import com.food.ordering.system.domain.valueobject.PaymentStatus;
 import com.food.ordering.system.payment.service.domain.valueobject.PaymentId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.UUID;
 
 public class Payment extends AggregateRoot<PaymentId> {
 
@@ -18,6 +21,20 @@ public class Payment extends AggregateRoot<PaymentId> {
     private PaymentStatus paymentStatus;
     private ZonedDateTime createAt;
 
+    public void initializePayment() {
+        setId(new PaymentId(UUID.randomUUID()));
+        createAt = ZonedDateTime.now(ZoneId.of("UTC"));
+    }
+
+    public void validatePayment(List<String> failureMessages) {
+        if (price == null || !price.isGreaterThanZero())
+            failureMessages.add("Total price must be greater than zero!");
+    }
+
+    public void updateStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
     private Payment(Builder builder) {
         super.setId(builder.paymentId);
         orderId = builder.orderId;
@@ -27,7 +44,7 @@ public class Payment extends AggregateRoot<PaymentId> {
         createAt = builder.createAt;
     }
 
-    public static Builder newBuilder() {
+    public static Builder builder() {
         return new Builder();
     }
 
