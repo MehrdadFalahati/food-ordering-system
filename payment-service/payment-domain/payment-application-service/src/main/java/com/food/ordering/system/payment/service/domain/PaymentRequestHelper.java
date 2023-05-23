@@ -37,7 +37,7 @@ public class PaymentRequestHelper {
     public PaymentEvent persistPayment(PaymentRequest paymentRequest) {
         log.info("Received payment complete event for order id: {}", paymentRequest.getOrderId());
         Payment payment = paymentDataMapper.paymentRequestModelToPayment(paymentRequest);
-        return getPaymentEvent(payment, PaymentStatus.COMPLETED);
+        return getPaymentEvent(payment, PersistStatus.INIT);
     }
 
     @Transactional
@@ -50,18 +50,18 @@ public class PaymentRequestHelper {
             throw new PaymentApplicationServiceException("Payment with order id: " + paymentRequest.getOrderId() + "could not be found!");
         }
         Payment payment = paymentResponse.get();
-        return getPaymentEvent(payment, PaymentStatus.CANCELLED);
+        return getPaymentEvent(payment, PersistStatus.CANCEL);
     }
 
-    private PaymentEvent getPaymentEvent(Payment payment, PaymentStatus paymentStatus) {
+    private PaymentEvent getPaymentEvent(Payment payment, PersistStatus persistStatus) {
         CreditEntry creditEntry = getCreditEntry(payment.getCustomerId());
         List<CreditHistory> creditHistories = getCreditHistories(payment.getCustomerId());
         List<String> failureMessages = new ArrayList<>();
         PaymentEvent paymentEvent = null;
-        if (paymentStatus == PaymentStatus.COMPLETED) {
+        if (persistStatus == PersistStatus.INIT) {
             paymentEvent =
                     paymentDomainService.validateAndInitiatePayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages));
-        } else if (paymentStatus == PaymentStatus.CANCELLED) {
+        } else if (persistStatus == PersistStatus.CANCEL) {
             paymentEvent =
                     paymentDomainService.validateAndCancelPayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages));
         }
@@ -93,5 +93,9 @@ public class PaymentRequestHelper {
             throw new PaymentApplicationServiceException("Could not find credit entry for customer: " + customerId.getValue());
         }
         return creditEntry.get();
+    }
+
+    private enum PersistStatus {
+        INIT, CANCEL
     }
 }
