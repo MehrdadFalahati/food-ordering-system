@@ -39,12 +39,7 @@ public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageL
         log.info("Publishing payment event with payment id: {} and order id: {}"
                 , paymentEvent.getPayment().getId().getValue()
                 , paymentEvent.getPayment().getOrderId().getValue());
-        if (paymentEvent instanceof PaymentCompletedEvent paymentCompletedEvent) {
-            paymentCompletedMessagePublisher.publish(paymentCompletedEvent);
-        } else if (paymentEvent instanceof PaymentCancelledEvent paymentCancelledEvent) {
-            paymentCanceledMessagePublisher.publish(paymentCancelledEvent);
-        } else if (paymentEvent instanceof PaymentFailedEvent paymentFailedEvent) {
-            paymentFailedMessagePublisher.publish(paymentFailedEvent);
-        }
+
+        paymentEvent.fire();
     }
 }

@@ -1,7 +1,6 @@
 package com.food.ordering.system.payment.service.domain;
 
 import com.food.ordering.system.domain.valueobject.CustomerId;
-import com.food.ordering.system.domain.valueobject.PaymentStatus;
 import com.food.ordering.system.payment.service.domain.dto.PaymentRequest;
 import com.food.ordering.system.payment.service.domain.entity.CreditEntry;
 import com.food.ordering.system.payment.service.domain.entity.CreditHistory;
@@ -9,6 +8,9 @@ import com.food.ordering.system.payment.service.domain.entity.Payment;
 import com.food.ordering.system.payment.service.domain.event.PaymentEvent;
 import com.food.ordering.system.payment.service.domain.exception.PaymentApplicationServiceException;
 import com.food.ordering.system.payment.service.domain.mapper.PaymentDataMapper;
+import com.food.ordering.system.payment.service.domain.port.output.message.publisher.PaymentCanceledMessagePublisher;
+import com.food.ordering.system.payment.service.domain.port.output.message.publisher.PaymentCompletedMessagePublisher;
+import com.food.ordering.system.payment.service.domain.port.output.message.publisher.PaymentFailedMessagePublisher;
 import com.food.ordering.system.payment.service.domain.port.output.repository.CreditEntryRepository;
 import com.food.ordering.system.payment.service.domain.port.output.repository.CreditHistoryRepository;
 import com.food.ordering.system.payment.service.domain.port.output.repository.PaymentRepository;
@@ -32,6 +34,9 @@ public class PaymentRequestHelper {
     private final PaymentRepository paymentRepository;
     private final CreditEntryRepository creditEntryRepository;
     private final CreditHistoryRepository creditHistoryRepository;
+    private final PaymentCompletedMessagePublisher paymentCompletedEventDomainEventPublisher;
+    private final PaymentCanceledMessagePublisher paymentCancelledEventDomainEventPublisher;
+    private final PaymentFailedMessagePublisher paymentFailedEventDomainEventPublisher;
 
     @Transactional
     public PaymentEvent persistPayment(PaymentRequest paymentRequest) {
@@ -60,10 +65,12 @@ public class PaymentRequestHelper {
         PaymentEvent paymentEvent = null;
         if (persistStatus == PersistStatus.INIT) {
             paymentEvent =
-                    paymentDomainService.validateAndInitiatePayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages));
+                    paymentDomainService.validateAndInitiatePayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages),
+                            paymentCompletedEventDomainEventPublisher, paymentFailedEventDomainEventPublisher);
         } else if (persistStatus == PersistStatus.CANCEL) {
             paymentEvent =
-                    paymentDomainService.validateAndCancelPayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages));
+                    paymentDomainService.validateAndCancelPayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages),
+                            paymentCancelledEventDomainEventPublisher, paymentFailedEventDomainEventPublisher);
         }
         persistDBObject(payment, creditEntry, creditHistories, failureMessages);
         return paymentEvent;
