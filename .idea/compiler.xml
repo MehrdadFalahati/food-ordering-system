@@ -25,6 +25,7 @@
         <module name="payment-container" />
         <module name="common-domain" />
         <module name="order-application" />
+        <module name="restaurant-domain-core" />
         <module name="order-domain-core" />
         <module name="payment-domain-core" />
         <module name="restaurant-application-service" />
@@ -64,6 +65,7 @@
       <module name="restaurant-container" options="-parameters" />
       <module name="restaurant-dataaccess" options="-parameters" />
       <module name="restaurant-domain" options="-parameters" />
+      <module name="restaurant-domain-core" options="-parameters" />
       <module name="restaurant-messaging" options="-parameters" />
       <module name="restaurant-service" options="-parameters" />
     </option>
