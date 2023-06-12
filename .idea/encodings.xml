@@ -34,6 +34,14 @@
     <file url="file://$PROJECT_DIR$/payment-service/payment-messaging/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-container/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-dataaccess/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-domain/restaurant-application-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-messaging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
