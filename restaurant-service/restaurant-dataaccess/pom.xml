@@ -11,5 +11,23 @@
 
     <artifactId>restaurant-dataaccess</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.mehrdad.falahati</groupId>
+            <artifactId>restaurant-application-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.food.ordering.system</groupId>
+            <artifactId>common-dataaccess</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
