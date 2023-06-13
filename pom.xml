@@ -48,6 +48,11 @@
             </dependency>
             <dependency>
                 <groupId>com.food.ordering.system</groupId>
+                <artifactId>common-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>order-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -114,6 +119,11 @@
             <dependency>
                 <groupId>com.github.mehrdad.falahati</groupId>
                 <artifactId>restaurant-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.mehrdad.falahati</groupId>
+                <artifactId>restaurant-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

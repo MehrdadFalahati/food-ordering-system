@@ -29,6 +29,7 @@
         <module name="order-domain-core" />
         <module name="payment-domain-core" />
         <module name="restaurant-application-service" />
+        <module name="common-dataaccess" />
         <module name="restaurant-messaging" />
       </profile>
     </annotationProcessing>
@@ -37,6 +38,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
       <module name="common-application" options="-parameters" />
+      <module name="common-dataaccess" options="-parameters" />
       <module name="common-domain" options="-parameters" />
       <module name="customer-service" options="-parameters" />
       <module name="food-ordering-system" options="-parameters" />
