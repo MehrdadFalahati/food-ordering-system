@@ -117,12 +117,12 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.mehrdad.falahati</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>restaurant-domain-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.mehrdad.falahati</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>restaurant-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
