@@ -23,8 +23,8 @@ spring:
     password: admin
     driver-class-name: org.postgresql.Driver
     platform: postgres
-    schema: classpath:init-schema.sql
-    data: classpath:init-data.sql
+    data-locations: classpath:init-data.sql
+    schema-locations: classpath:init-schema.sql
     initialization-mode: always
 
 kafka-config:
