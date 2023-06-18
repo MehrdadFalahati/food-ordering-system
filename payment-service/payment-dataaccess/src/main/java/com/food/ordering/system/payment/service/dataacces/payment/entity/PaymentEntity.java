@@ -25,7 +25,7 @@ public class PaymentEntity {
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private PaymentStatus status;
-    private ZonedDateTime createAt;
+    private ZonedDateTime createdAt;
 
     @Override
     public boolean equals(Object o) {

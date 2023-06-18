@@ -65,11 +65,11 @@ public class PaymentRequestHelper {
         PaymentEvent paymentEvent = null;
         if (persistStatus == PersistStatus.INIT) {
             paymentEvent =
-                    paymentDomainService.validateAndInitiatePayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages),
+                    paymentDomainService.validateAndInitiatePayment(new PaymentServiceDto(payment, creditEntry, new ArrayList<>(creditHistories), failureMessages),
                             paymentCompletedEventDomainEventPublisher, paymentFailedEventDomainEventPublisher);
         } else if (persistStatus == PersistStatus.CANCEL) {
             paymentEvent =
-                    paymentDomainService.validateAndCancelPayment(new PaymentServiceDto(payment, creditEntry, creditHistories, failureMessages),
+                    paymentDomainService.validateAndCancelPayment(new PaymentServiceDto(payment, creditEntry, new ArrayList<>(creditHistories), failureMessages),
                             paymentCancelledEventDomainEventPublisher, paymentFailedEventDomainEventPublisher);
         }
         persistDBObject(payment, creditEntry, creditHistories, failureMessages);
