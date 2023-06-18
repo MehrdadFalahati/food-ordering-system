@@ -5,7 +5,7 @@ logging:
   level:
     com.food.ordering.system : DEBUG
 
-order-service:
+restaurant-service:
   restaurant-approval-request-topic-name: restaurant-approval-request-value
   restaurant-approval-response-topic-name: restaurant-approval-response-value
 

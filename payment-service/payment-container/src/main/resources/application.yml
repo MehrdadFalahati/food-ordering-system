@@ -5,7 +5,7 @@ logging:
   level:
     com.food.ordering.system : DEBUG
 
-order-service:
+payment-service:
   payment-request-topic-name: payment-request-value
   payment-response-topic-name: payment-response-value
 
